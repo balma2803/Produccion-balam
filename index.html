@@ -1,0 +1,86 @@
+<script>
+    // Al agregar "window." nos aseguramos de que el HTML siempre encuentre la función
+    window.dictar = function(idCampo, btn) {
+      if (!('webkitSpeechRecognition' in window)) {
+        alert('Tu navegador no soporta reconocimiento de voz. Usa Google Chrome.');
+        return;
+      }
+
+      const recognition = new webkitSpeechRecognition();
+      recognition.lang = 'es-ES';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      const restaurarBoton = () => {
+        btn.innerText = 'Dictar';
+        btn.classList.remove('listening');
+      };
+
+      recognition.onstart = () => {
+        btn.innerText = 'Escuchando...';
+        btn.classList.add('listening');
+      };
+
+      recognition.onerror = (event) => {
+        alert('Error al reconocer la voz: ' + event.error);
+        restaurarBoton();
+      };
+
+      recognition.onend = () => {
+        restaurarBoton();
+      };
+
+      recognition.onresult = (event) => {
+        let texto = event.results[0][0].transcript.toUpperCase();
+        if (['q1', 'q2', 'q3', 'q4', 'q8'].includes(idCampo)) {
+          texto = texto.replace(/\s+/g, '');
+        }
+        document.getElementById(idCampo).value = texto;
+      };
+
+      recognition.start();
+    };
+
+    const campos = document.querySelectorAll('input[type="text"], input[type="date"]');
+    campos.forEach((campo, index) => {
+      campo.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const siguiente = campos[index + 1];
+          if (siguiente) siguiente.focus();
+        }
+      });
+    });
+
+    document.getElementById('quizForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const answers = {};
+      for (let i = 1; i <= 10; i++) {
+        const field = document.getElementById(`q${i}`);
+        let valor = field ? field.value.trim().toUpperCase() : '';
+        if ([1, 2, 3, 4, 8].includes(i)) {
+          valor = valor.replace(/\s+/g, '');
+        }
+        answers[`pregunta${i}`] = valor;
+      }
+
+      const mensaje = `
+*OS:* ${answers.pregunta1}
+*TIPO DE ORDEN:* ${answers.pregunta2}
+*FOLIO PISAPLEX:* ${answers.pregunta3}
+*TEL:* ${answers.pregunta4}
+*CLIENTE:* ${answers.pregunta5}
+*DIRECCIÓN:* ${answers.pregunta6}
+*DISTRITO:* ${answers.pregunta7}
+*ALFANUMÉRICO:* ${answers.pregunta8}
+*FIBRA:* ${answers.pregunta9}
+*FECHA:* ${answers.pregunta10}
+*TÉCNICO:* CARLOS MORALES
+*LIQUIDADO:* OK`;
+
+      const numeroTelefono = '5219981962125';
+      const url = `https://wa.me/${numeroTelefono}?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, '_blank');
+    });
+  </script>
