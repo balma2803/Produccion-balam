@@ -1,5 +1,263 @@
-<script>
-    // Al agregar "window." nos aseguramos de que el HTML siempre encuentre la función
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prod Balam</title>
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #4e5073;
+      color: #fff;
+    }
+    h1 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    h1 img {
+      height: 50px;
+      width: 50px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .question-container {
+      background-color: #c5c7e3;
+      padding: 20px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      color: #000;
+    }
+    input[type="text"], input[type="date"], select {
+      width: 100%;
+      height: 40px;
+      margin-top: 10px;
+      padding: 8px;
+      box-sizing: border-box;
+      text-transform: uppercase;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: white;
+    }
+    .otro-container {
+      display: none; 
+      margin-top: 10px; 
+      padding-top: 10px;
+      border-top: 1px dashed #999;
+    }
+    button {
+      background-color: #3358FF;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .dictate-button {
+      background-color: #FF8C00;
+      margin-left: 10px;
+    }
+    .dictate-button.listening {
+      background-color: #ff4444 !important;
+    }
+    .whatsapp-button {
+      background-color: #25D366;
+      width: 100%;
+      font-weight: bold;
+    }
+    .whatsapp-button:hover {
+      background-color: #128C7E;
+    }
+    .share-img-button {
+      background-color: #007BFF;
+      width: 100%;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .share-img-button:hover {
+      background-color: #0056b3;
+    }
+    #barcode-container {
+      display: none;
+      margin-top: 15px;
+      text-align: center;
+      background-color: white;
+      padding: 15px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    #barcode {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: #ccc;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <h1>
+    <img src="foto.jpg" alt="qué pedo?"/>
+    Producción de Balam
+  </h1>
+  
+  <form id="quizForm">
+    <div class="question-container">
+      <label for="q1">1. NÚMERO DE OS</label>
+      <input type="text" id="q1" required>
+      <button type="button" class="dictate-button" onclick="dictar('q1', this)">Dictar</button>
+    </div>
+    
+    <div class="question-container">
+      <label for="q2_select">2. ¿QUÉ TIPO DE TAREA?</label>
+      <select id="q2_select" onchange="mostrarOcultarOtro()" required>
+        <option value="" disabled selected>SELECCIONA UNA OPCIÓN</option>
+        <option value="A0MLPBG">A0MLPBG</option>
+        <option value="A01LPBG">A01LPBG</option>
+        <option value="D2MLPBG">D2MLPBG</option>
+        <option value="D22LPBG">D22LPBG</option>
+        <option value="OTRO">OTRA TAREA (ESPECIFICAR)</option>
+      </select>
+      
+      <div id="q2_otro_container" class="otro-container">
+        <label for="q2_otro">ESPECIFICA LA TAREA:</label>
+        <input type="text" id="q2_otro" placeholder="Escribe o dicta la tarea...">
+        <button type="button" class="dictate-button" onclick="dictar('q2_otro', this)">Dictar</button>
+      </div>
+    </div>
+
+    <div class="question-container">
+      <label for="q3">3. ¿CUÁL ES EL FOLIO PISAPLEX?</label>
+      <input type="text" id="q3" required>
+      <button type="button" class="dictate-button" onclick="dictar('q3', this)">Dictar</button>
+    </div>
+    <div class="question-container">
+      <label for="q4">4. NÚMERO TELEFÓNICO</label>
+      <input type="text" id="q4" required>
+      <button type="button" class="dictate-button" onclick="dictar('q4', this)">Dictar</button>
+    </div>
+    <div class="question-container">
+      <label for="q5">5. NOMBRE DEL CLIENTE</label>
+      <input type="text" id="q5" required>
+      <button type="button" class="dictate-button" onclick="dictar('q5', this)">Dictar</button>
+    </div>
+    <div class="question-container">
+      <label for="q6">6. DIRECCIÓN</label>
+      <input type="text" id="q6" required>
+      <button type="button" class="dictate-button" onclick="dictar('q6', this)">Dictar</button>
+    </div>
+    <div class="question-container">
+      <label for="q7">7. DISTRITO, TERMINAL Y PUERTO</label>
+      <input type="text" id="q7" required>
+    </div>
+    
+    <div class="question-container">
+      <label for="q8">8. ALFANUMÉRICO</label>
+      <input type="text" id="q8" required>
+      <button type="button" class="dictate-button" onclick="dictar('q8', this)">Dictar</button>
+      
+      <div id="barcode-container">
+        <img id="barcode"/>
+        <button type="button" class="share-img-button" onclick="compartirImagen()">Compartir Imagen del Código</button>
+        <button type="button" class="whatsapp-button" onclick="enviarAlfanumericoSolo()">Enviar Solo Texto a 5529858210</button>
+      </div>
+    </div>
+    
+    <div class="question-container">
+      <label for="q9">9. DISTANCIA, TIPO DE INSTALACIÓN (aérea o subterránea)</label>
+      <input type="text" id="q9" required>
+    </div>
+    <div class="question-container">
+      <label for="q10">10. FECHA</label>
+      <input type="date" id="q10" required>
+    </div>
+
+    <button type="submit">Balam, guarda tus respuestas</button>
+  </form>
+  
+  <footer>
+    Desarrollado por Carlos Morales 
+  </footer>
+
+  <script>
+    window.actualizarCodigoBarras = function() {
+      const inputQ8 = document.getElementById('q8').value.trim().toUpperCase().replace(/\s+/g, '');
+      const container = document.getElementById('barcode-container');
+      
+      if (inputQ8) {
+        container.style.display = 'block';
+        JsBarcode("#barcode", inputQ8, {
+          format: "CODE128",
+          lineColor: "#000",
+          width: 2,
+          height: 60,
+          displayValue: true,
+          fontSize: 18
+        });
+      } else {
+        container.style.display = 'none';
+      }
+    };
+
+    // NUEVA FUNCIÓN: Comparte la imagen usando el menú nativo del celular
+    window.compartirImagen = async function() {
+      const img = document.getElementById('barcode');
+      
+      if (!img.src || !img.src.startsWith('data:image')) {
+        alert('Primero debes generar el código de barras.');
+        return;
+      }
+
+      try {
+        // Convertimos la imagen generada a un archivo compatible para compartir
+        const response = await fetch(img.src);
+        const blob = await response.blob();
+        const file = new File([blob], 'codigo_alfanumerico.png', { type: blob.type });
+
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({
+            title: 'Código Alfanumérico',
+            files: [file]
+          });
+        } else {
+          alert('Tu navegador no soporta esta función directa. Por favor, intenta en Google Chrome o Safari.');
+        }
+      } catch (error) {
+        console.error('Error al compartir:', error);
+      }
+    };
+
+    window.enviarAlfanumericoSolo = function() {
+      const inputQ8 = document.getElementById('q8').value.trim().toUpperCase().replace(/\s+/g, '');
+      if (inputQ8) {
+        const numeroSecundario = '525529858210';
+        const mensaje = `Código Alfanumérico: ${inputQ8}`;
+        const url = `https://wa.me/${numeroSecundario}?text=${encodeURIComponent(mensaje)}`;
+        window.open(url, '_blank');
+      } else {
+        alert('Por favor, ingresa o dicta el código alfanumérico primero.');
+      }
+    };
+
+    document.getElementById('q8').addEventListener('input', window.actualizarCodigoBarras);
+
     window.dictar = function(idCampo, btn) {
       if (!('webkitSpeechRecognition' in window)) {
         alert('Tu navegador no soporta reconocimiento de voz. Usa Google Chrome.');
@@ -32,21 +290,43 @@
 
       recognition.onresult = (event) => {
         let texto = event.results[0][0].transcript.toUpperCase();
-        if (['q1', 'q2', 'q3', 'q4', 'q8'].includes(idCampo)) {
+        if (['q1', 'q2_otro', 'q3', 'q4', 'q8'].includes(idCampo)) {
           texto = texto.replace(/\s+/g, '');
         }
         document.getElementById(idCampo).value = texto;
+        
+        if (idCampo === 'q8') {
+          window.actualizarCodigoBarras();
+        }
       };
 
       recognition.start();
     };
 
-    const campos = document.querySelectorAll('input[type="text"], input[type="date"]');
+    window.mostrarOcultarOtro = function() {
+      const select = document.getElementById('q2_select');
+      const contenedorOtro = document.getElementById('q2_otro_container');
+      const inputOtro = document.getElementById('q2_otro');
+
+      if (select.value === 'OTRO') {
+        contenedorOtro.style.display = 'block';
+        inputOtro.setAttribute('required', 'required');
+      } else {
+        contenedorOtro.style.display = 'none';
+        inputOtro.removeAttribute('required');
+        inputOtro.value = ''; 
+      }
+    };
+
+    const campos = document.querySelectorAll('input[type="text"], input[type="date"], select');
     campos.forEach((campo, index) => {
       campo.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
           e.preventDefault();
-          const siguiente = campos[index + 1];
+          let siguiente = campos[index + 1];
+          if (siguiente && siguiente.id === 'q2_otro' && document.getElementById('q2_select').value !== 'OTRO') {
+              siguiente = campos[index + 2];
+          }
           if (siguiente) siguiente.focus();
         }
       });
@@ -54,12 +334,26 @@
 
     document.getElementById('quizForm').addEventListener('submit', function(e) {
       e.preventDefault();
-
       const answers = {};
+
       for (let i = 1; i <= 10; i++) {
+        if (i === 2) {
+          const selectQ2 = document.getElementById('q2_select');
+          let valorQ2 = '';
+          
+          if (selectQ2.value === 'OTRO') {
+            valorQ2 = document.getElementById('q2_otro').value.trim().toUpperCase();
+          } else {
+            valorQ2 = selectQ2.value;
+          }
+          
+          answers['pregunta2'] = valorQ2.replace(/\s+/g, '');
+          continue; 
+        }
+
         const field = document.getElementById(`q${i}`);
         let valor = field ? field.value.trim().toUpperCase() : '';
-        if ([1, 2, 3, 4, 8].includes(i)) {
+        if ([1, 3, 4, 8].includes(i)) {
           valor = valor.replace(/\s+/g, '');
         }
         answers[`pregunta${i}`] = valor;
@@ -84,3 +378,5 @@
       window.open(url, '_blank');
     });
   </script>
+</body>
+</html>
