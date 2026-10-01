@@ -1,363 +1,1825 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Prod Balam</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Producción Balam</title>
+
+  <!-- Código de barras -->
   <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #4e5073;
-      color: #fff;
+
+    * {
+      box-sizing: border-box;
     }
-    h1 {
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+
+      font-family: Arial, Helvetica, sans-serif;
+
+      background:
+        radial-gradient(circle at top right, #3e4168 0%, transparent 35%),
+        linear-gradient(145deg, #17182b, #282a48 55%, #34365b);
+
+      color: white;
+    }
+
+
+    /* =========================================
+       APP
+       ========================================= */
+
+    .app {
+      width: 100%;
+      max-width: 720px;
+
+      margin: auto;
+
+      padding: 18px 15px 40px;
+    }
+
+
+    /* =========================================
+       ENCABEZADO
+       ========================================= */
+
+    .header {
       display: flex;
       align-items: center;
-      gap: 10px;
+
+      gap: 14px;
+
+      margin-bottom: 18px;
     }
-    h1 img {
-      height: 50px;
-      width: 50px;
+
+    .logo {
+      width: 58px;
+      height: 58px;
+
+      border-radius: 16px;
+
       object-fit: cover;
-      border-radius: 50%;
+
+      border: 2px solid rgba(255,255,255,0.2);
+
+      box-shadow:
+        0 8px 25px rgba(0,0,0,0.25);
     }
-    .question-container {
-      background-color: #c5c7e3;
-      padding: 20px;
-      margin-bottom: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      color: #000;
+
+    .header-info {
+      flex: 1;
     }
-    input[type="text"], input[type="date"], select {
-      width: 100%;
-      height: 40px;
-      margin-top: 10px;
-      padding: 8px;
-      box-sizing: border-box;
-      text-transform: uppercase;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      background-color: white;
+
+    .header-info h1 {
+      margin: 0;
+
+      font-size: 24px;
+
+      font-weight: 800;
+
+      letter-spacing: -0.5px;
     }
-    .otro-container {
-      display: none; 
-      margin-top: 10px; 
-      padding-top: 10px;
-      border-top: 1px dashed #999;
+
+    .header-info p {
+      margin: 5px 0 0;
+
+      color: #bfc2df;
+
+      font-size: 13px;
     }
-    button {
-      background-color: #3358FF;
-      color: white;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-      margin-top: 10px;
-      transition: background-color 0.3s;
+
+
+    /* =========================================
+       PROGRESO
+       ========================================= */
+
+    .progress-box {
+      background: rgba(255,255,255,0.08);
+
+      border: 1px solid rgba(255,255,255,0.08);
+
+      border-radius: 14px;
+
+      padding: 13px 15px;
+
+      margin-bottom: 18px;
+
+      backdrop-filter: blur(10px);
     }
-    button:hover {
-      background-color: #45a049;
+
+    .progress-top {
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      margin-bottom: 9px;
     }
-    .dictate-button {
-      background-color: #FF8C00;
-      margin-left: 10px;
-    }
-    .dictate-button.listening {
-      background-color: #ff4444 !important;
-    }
-    .whatsapp-button {
-      background-color: #25D366;
-      width: 100%;
-      font-weight: bold;
-    }
-    .whatsapp-button:hover {
-      background-color: #128C7E;
-    }
-    .share-img-button {
-      background-color: #007BFF;
-      width: 100%;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    .share-img-button:hover {
-      background-color: #0056b3;
-    }
-    #barcode-container {
-      display: none;
-      margin-top: 15px;
-      text-align: center;
-      background-color: white;
-      padding: 15px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-    }
-    #barcode {
-      max-width: 100%;
-      height: auto;
-      margin-bottom: 10px;
-    }
-    footer {
-      text-align: center;
+
+    .progress-title {
       font-size: 12px;
-      color: #ccc;
-      margin-top: 40px;
+
+      color: #bfc2df;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.7px;
     }
-  </style>
+
+    .progress-number {
+      font-size: 13px;
+
+      font-weight: bold;
+    }
+
+    .progress-bar {
+      height: 6px;
+
+      width: 100%;
+
+      background: rgba(255,255,255,0.12);
+
+      border-radius: 20px;
+
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+
+      width: 10%;
+
+      background:
+        linear-gradient(
+          90deg,
+          #5b7cff,
+          #8c9eff
+        );
+
+      border-radius: 20px;
+
+      transition:
+        width 0.3s ease;
+    }
+
+
+    /* =========================================
+       TARJETAS
+       ========================================= */
+
+    .question-container {
+      position: relative;
+
+      background: rgba(255,255,255,0.96);
+
+      color: #17182b;
+
+      border-radius: 18px;
+
+      padding: 18px;
+
+      margin-bottom: 13px;
+
+      border: 1px solid rgba(255,255,255,0.15);
+
+      box-shadow:
+        0 8px 25px rgba(0,0,0,0.16),
+        0 1px 2px rgba(0,0,0,0.08);
+    }
+
+    .question-container label {
+      display: block;
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      margin-bottom: 7px;
+    }
+
+
+    /* =========================================
+       INPUTS
+       ========================================= */
+
+    input[type="text"],
+    input[type="date"],
+    select {
+
+      width: 100%;
+
+      height: 46px;
+
+      padding: 0 13px;
+
+      margin-top: 5px;
+
+      border: 1px solid #d9dbea;
+
+      border-radius: 11px;
+
+      background: #f7f7fb;
+
+      color: #17182b;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      font-size: 15px;
+
+      outline: none;
+
+      transition:
+        border-color 0.2s,
+        box-shadow 0.2s,
+        background 0.2s;
+    }
+
+    input[type="text"]:focus,
+    input[type="date"]:focus,
+    select:focus {
+
+      background: #ffffff;
+
+      border-color: #6478e8;
+
+      box-shadow:
+        0 0 0 3px rgba(100,120,232,0.15);
+    }
+
+    input::placeholder {
+      color: #999db2;
+    }
+
+
+    /* =========================================
+       DICTADO
+       ========================================= */
+
+    .dictate-button {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 7px;
+
+      height: 38px;
+
+      margin-top: 10px;
+
+      margin-left: 0;
+
+      padding: 0 15px;
+
+      background: #eef1ff;
+
+      color: #5266d2;
+
+      border: 1px solid #dce1ff;
+
+      border-radius: 10px;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition:
+        transform 0.15s,
+        background 0.2s;
+    }
+
+    .dictate-button::before {
+      content: "🎙️";
+
+      font-size: 15px;
+    }
+
+    .dictate-button:hover {
+      background: #e2e7ff;
+    }
+
+    .dictate-button:active {
+      transform: scale(0.97);
+    }
+
+    .dictate-button.listening {
+
+      background: #ffe5e5 !important;
+
+      color: #e53935 !important;
+
+      border-color: #ffcaca !important;
+    }
+
+    .dictate-button.listening::before {
+      content: "🔴";
+    }
+
+
+    /* =========================================
+       OTRA TAREA
+       ========================================= */
+
+    .otro-container {
+
+      display: none;
+
+      margin-top: 14px;
+
+      padding-top: 14px;
+
+      border-top:
+        1px dashed #c8cad8;
+    }
+
+
+    /* =========================================
+       CÓDIGO DE BARRAS
+       ========================================= */
+
+    #barcode-container {
+
+      display: none;
+
+      margin-top: 15px;
+
+      padding: 15px;
+
+      background: #ffffff;
+
+      border-radius: 14px;
+
+      text-align: center;
+
+      border: 1px solid #e0e1eb;
+    }
+
+    #barcode {
+
+      max-width: 100%;
+
+      height: auto;
+
+      margin-bottom: 10px;
+    }
+
+
+    /* =========================================
+       BOTONES
+       ========================================= */
+
+    button {
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+    }
+
+    .share-img-button,
+    .whatsapp-button {
+
+      width: 100%;
+
+      height: 44px;
+
+      margin: 5px 0;
+
+      border: none;
+
+      border-radius: 11px;
+
+      color: white;
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition:
+        transform 0.15s,
+        filter 0.2s;
+    }
+
+    .share-img-button {
+      background: #1677ff;
+    }
+
+    .whatsapp-button {
+      background: #20c76b;
+    }
+
+    .share-img-button:hover,
+    .whatsapp-button:hover {
+      filter: brightness(1.08);
+    }
+
+    .share-img-button:active,
+    .whatsapp-button:active {
+      transform: scale(0.98);
+    }
+
+
+    /* =========================================
+       BOTÓN FINAL
+       ========================================= */
+
+    #quizForm > button[type="submit"] {
+
+      width: 100%;
+
+      min-height: 55px;
+
+      margin-top: 8px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #5368e8,
+          #765de8
+        );
+
+      color: white;
+
+      border: none;
+
+      border-radius: 15px;
+
+      font-size: 16px;
+
+      font-weight: 800;
+
+      box-shadow:
+        0 8px 20px rgba(82,101,220,0.3);
+
+      cursor: pointer;
+
+      transition:
+        transform 0.15s,
+        box-shadow 0.2s;
+    }
+
+    #quizForm > button[type="submit"]:hover {
+
+      box-shadow:
+        0 10px 25px rgba(82,101,220,0.4);
+    }
+
+    #quizForm > button[type="submit"]:active {
+      transform: scale(0.98);
+    }
+
+
+    /* =========================================
+       MENSAJE FINAL
+       ========================================= */
+
+    #mensaje-final {
+
+      display: none;
+
+      margin-top: 18px;
+
+      padding: 18px;
+
+      background:
+        rgba(70,220,140,0.12);
+
+      color: #d9ffe9;
+
+      border:
+        1px solid rgba(80,230,150,0.25);
+
+      border-radius: 15px;
+
+      text-align: center;
+
+      font-size: 15px;
+
+      font-weight: 700;
+    }
+
+
+    /* =========================================
+       FOOTER
+       ========================================= */
+
+    footer {
+
+      text-align: center;
+
+      margin-top: 25px;
+
+      color: #9296b7;
+
+      font-size: 11px;
+    }
+
+
+    /* =========================================
+       CELULAR
+       ========================================= */
+
+    @media (max-width: 600px) {
+
+      .app {
+        padding:
+          13px
+          11px
+          30px;
+      }
+
+      .header-info h1 {
+        font-size: 21px;
+      }
+
+      .logo {
+        width: 52px;
+        height: 52px;
+      }
+
+      .question-container {
+        padding: 16px;
+
+        border-radius: 16px;
+      }
+
+      input[type="text"],
+      input[type="date"],
+      select {
+
+        height: 48px;
+
+        font-size: 16px;
+      }
+
+      .dictate-button {
+
+        width: 100%;
+
+        height: 42px;
+      }
+    }
+
+  
+/* =========================
+   ANIMACIONES
+   ========================= */
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes softPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(229,57,53,0);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(229,57,53,0.12);
+  }
+}
+
+@keyframes barcodeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes successIn {
+  0% {
+    opacity: 0;
+    transform: translateY(15px) scale(.96);
+  }
+  70% {
+    transform: translateY(-3px) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes successCheck {
+  from {
+    opacity: 0;
+    transform: scale(.5) rotate(-15deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+.question-container {
+  animation: cardEnter .55s ease both;
+}
+
+.question-container:nth-of-type(1) { animation-delay: .04s; }
+.question-container:nth-of-type(2) { animation-delay: .08s; }
+.question-container:nth-of-type(3) { animation-delay: .12s; }
+.question-container:nth-of-type(4) { animation-delay: .16s; }
+.question-container:nth-of-type(5) { animation-delay: .20s; }
+.question-container:nth-of-type(6) { animation-delay: .24s; }
+.question-container:nth-of-type(7) { animation-delay: .28s; }
+.question-container:nth-of-type(8) { animation-delay: .32s; }
+.question-container:nth-of-type(9) { animation-delay: .36s; }
+.question-container:nth-of-type(10) { animation-delay: .40s; }
+
+.dictate-button.listening {
+  animation: softPulse 1.15s ease-in-out infinite;
+}
+
+#barcode-container.barcode-visible {
+  animation: barcodeIn .4s ease both;
+}
+
+#mensaje-final.success-visible {
+  animation: successIn .5s ease both;
+}
+
+.success-icon {
+  display: block;
+  font-size: 38px;
+  line-height: 1;
+  margin-bottom: 9px;
+  animation: successCheck .5s .12s ease both;
+}
+
+#quizForm > button[type="submit"] {
+  position: relative;
+  overflow: hidden;
+}
+
+#quizForm > button[type="submit"]::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.22),
+    transparent
+  );
+  transform: skewX(-18deg);
+}
+
+#quizForm > button[type="submit"]:hover::after {
+  animation: buttonShine .7s ease;
+}
+
+@keyframes buttonShine {
+  from { left: -75%; }
+  to { left: 130%; }
+}
+
+</style>
 </head>
+
+
 <body>
-  <h1>
-    <img src="foto.jpg" alt="qué pedo?"/>
-    Producción de Balam
-  </h1>
-  
+
+
+<div class="app">
+
+
+  <!-- =========================================
+       ENCABEZADO
+       ========================================= -->
+
+  <div class="header">
+
+    <img
+      src="foto.jpg"
+      class="logo"
+      alt="Balam"
+    >
+
+    <div class="header-info">
+
+      <h1>
+        Producción Balam
+      </h1>
+
+      <p>
+        Registro de orden de trabajo
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================
+       PROGRESO
+       ========================================= -->
+
+  <div class="progress-box">
+
+    <div class="progress-top">
+
+      <span class="progress-title">
+        Progreso
+      </span>
+
+      <span
+        class="progress-number"
+        id="progress-number"
+      >
+        0 / 10
+      </span>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div
+        class="progress-fill"
+        id="progress-fill"
+      ></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================
+       FORMULARIO
+       ========================================= -->
+
   <form id="quizForm">
+
+
+    <!-- 1 -->
+
     <div class="question-container">
-      <label for="q1">1. NÚMERO DE OS</label>
-      <input type="text" id="q1" required>
-      <button type="button" class="dictate-button" onclick="dictar('q1', this)">Dictar</button>
+
+      <label for="q1">
+        1. NÚMERO DE OS
+      </label>
+
+      <input
+        type="text"
+        id="q1"
+        required
+      >
+
+      <button
+        type="button"
+        class="dictate-button"
+        onclick="dictar('q1', this)"
+      >
+        Dictar
+      </button>
+
     </div>
-    
+
+
+    <!-- 2 -->
+
     <div class="question-container">
-      <label for="q2_select">2. ¿QUÉ TIPO DE TAREA?</label>
-      <select id="q2_select" onchange="mostrarOcultarOtro()" required>
-        <option value="" disabled selected>SELECCIONA UNA OPCIÓN</option>
-        <option value="A0MLPBG">A0MLPBG</option>
-        <option value="A01LPBG">A01LPBG</option>
-        <option value="D2MLPBG">D2MLPBG</option>
-        <option value="D22LPBG">D22LPBG</option>
-        <option value="OTRO">OTRA TAREA (ESPECIFICAR)</option>
+
+      <label for="q2_select">
+        2. ¿QUÉ TIPO DE TAREA?
+      </label>
+
+      <select
+        id="q2_select"
+        onchange="mostrarOcultarOtro()"
+        required
+      >
+
+        <option
+          value=""
+          disabled
+          selected
+        >
+          SELECCIONA UNA OPCIÓN
+        </option>
+
+        <option value="A0MLPBG">
+          A0MLPBG
+        </option>
+
+        <option value="A01LPBG">
+          A01LPBG
+        </option>
+
+        <option value="A01LPBGPI">
+          A01LPBGPI
+        </option>
+
+        <option value="A01LPBGPE">
+          A01LPBGPE
+        </option>
+
+        <option value="A02LPBG">
+          A02LPBG
+        </option>
+
+        <option value="D2MLPBG">
+          D2MLPBG
+        </option>
+
+        <option value="D22LPBG">
+          D22LPBG
+        </option>
+
+        <option value="D22LPBGPI">
+          D22LPBGPI
+        </option>
+
+        <option value="OTRO">
+          OTRA TAREA (ESPECIFICAR)
+        </option>
+
       </select>
-      
-      <div id="q2_otro_container" class="otro-container">
-        <label for="q2_otro">ESPECIFICA LA TAREA:</label>
-        <input type="text" id="q2_otro" placeholder="Escribe o dicta la tarea...">
-        <button type="button" class="dictate-button" onclick="dictar('q2_otro', this)">Dictar</button>
+
+
+      <div
+        id="q2_otro_container"
+        class="otro-container"
+      >
+
+        <label for="q2_otro">
+          ESPECIFICA LA TAREA:
+        </label>
+
+        <input
+          type="text"
+          id="q2_otro"
+          placeholder="Escribe o dicta la tarea..."
+        >
+
+        <button
+          type="button"
+          class="dictate-button"
+          onclick="dictar('q2_otro', this)"
+        >
+          Dictar
+        </button>
+
       </div>
+
     </div>
 
+
+    <!-- 3 -->
+
     <div class="question-container">
-      <label for="q3">3. ¿CUÁL ES EL FOLIO PISAPLEX?</label>
-      <input type="text" id="q3" required>
-      <button type="button" class="dictate-button" onclick="dictar('q3', this)">Dictar</button>
+
+      <label for="q3">
+        3. ¿CUÁL ES EL FOLIO PISAPLEX?
+      </label>
+
+      <input
+        type="text"
+        id="q3"
+        required
+      >
+
+      <button
+        type="button"
+        class="dictate-button"
+        onclick="dictar('q3', this)"
+      >
+        Dictar
+      </button>
+
     </div>
+
+
+    <!-- 4 -->
+
     <div class="question-container">
-      <label for="q4">4. NÚMERO TELEFÓNICO</label>
-      <input type="text" id="q4" required>
-      <button type="button" class="dictate-button" onclick="dictar('q4', this)">Dictar</button>
+
+      <label for="q4">
+        4. NÚMERO TELEFÓNICO
+      </label>
+
+      <input
+        type="text"
+        id="q4"
+        required
+      >
+
+      <button
+        type="button"
+        class="dictate-button"
+        onclick="dictar('q4', this)"
+      >
+        Dictar
+      </button>
+
     </div>
+
+
+    <!-- 5 -->
+
     <div class="question-container">
-      <label for="q5">5. NOMBRE DEL CLIENTE</label>
-      <input type="text" id="q5" required>
-      <button type="button" class="dictate-button" onclick="dictar('q5', this)">Dictar</button>
+
+      <label for="q5">
+        5. NOMBRE DEL CLIENTE
+      </label>
+
+      <input
+        type="text"
+        id="q5"
+        required
+      >
+
+      <button
+        type="button"
+        class="dictate-button"
+        onclick="dictar('q5', this)"
+      >
+        Dictar
+      </button>
+
     </div>
+
+
+    <!-- 6 -->
+
     <div class="question-container">
-      <label for="q6">6. DIRECCIÓN</label>
-      <input type="text" id="q6" required>
-      <button type="button" class="dictate-button" onclick="dictar('q6', this)">Dictar</button>
+
+      <label for="q6">
+        6. DIRECCIÓN
+      </label>
+
+      <input
+        type="text"
+        id="q6"
+        required
+      >
+
+      <button
+        type="button"
+        class="dictate-button"
+        onclick="dictar('q6', this)"
+      >
+        Dictar
+      </button>
+
     </div>
+
+
+    <!-- 7 -->
+
     <div class="question-container">
-      <label for="q7">7. DISTRITO, TERMINAL Y PUERTO</label>
-      <input type="text" id="q7" required>
+
+      <label for="q7">
+        7. DISTRITO, TERMINAL Y PUERTO
+      </label>
+
+      <input
+        type="text"
+        id="q7"
+        required
+      >
+
     </div>
-    
+
+
+    <!-- 8 -->
+
     <div class="question-container">
-      <label for="q8">8. ALFANUMÉRICO</label>
-      <input type="text" id="q8" required>
-      <button type="button" class="dictate-button" onclick="dictar('q8', this)">Dictar</button>
-      
+
+      <label for="q8">
+        8. ALFANUMÉRICO
+      </label>
+
+      <input
+        type="text"
+        id="q8"
+        required
+      >
+
+      <button
+        type="button"
+        class="dictate-button"
+        onclick="dictar('q8', this)"
+      >
+        Dictar
+      </button>
+
+
       <div id="barcode-container">
-        <img id="barcode"/>
-        <button type="button" class="share-img-button" onclick="compartirImagen()">Compartir Imagen del Código</button>
-        <button type="button" class="whatsapp-button" onclick="enviarAlfanumericoSolo()">Enviar Solo Texto a 5529858210</button>
+
+        <img
+          id="barcode"
+          alt="Código de barras"
+        >
+
+        <button
+          type="button"
+          class="share-img-button"
+          onclick="compartirImagen()"
+        >
+          Compartir Imagen del Código
+        </button>
+
+        <button
+          type="button"
+          class="whatsapp-button"
+          onclick="enviarAlfanumericoSolo()"
+        >
+          Enviar Solo Texto a 5529858210
+        </button>
+
       </div>
-    </div>
-    
-    <div class="question-container">
-      <label for="q9">9. DISTANCIA, TIPO DE INSTALACIÓN (aérea o subterránea)</label>
-      <input type="text" id="q9" required>
-    </div>
-    <div class="question-container">
-      <label for="q10">10. FECHA</label>
-      <input type="date" id="q10" required>
+
     </div>
 
-    <button type="submit">Balam, guarda tus respuestas</button>
+
+    <!-- 9 -->
+
+    <div class="question-container">
+
+      <label for="q9">
+        9. DISTANCIA, TIPO DE INSTALACIÓN
+        (aérea o subterránea)
+      </label>
+
+      <input
+        type="text"
+        id="q9"
+        required
+      >
+
+    </div>
+
+
+    <!-- 10 -->
+
+    <div class="question-container">
+
+      <label for="q10">
+        10. FECHA
+      </label>
+
+      <input
+        type="date"
+        id="q10"
+        required
+      >
+
+    </div>
+
+
+    <!-- BOTÓN FINAL -->
+
+    <button type="submit">
+
+      ✓ &nbsp; Balam, guarda tus respuestas
+
+    </button>
+
+
   </form>
-  
+
+
+  <!-- =========================================
+       MENSAJE FINAL
+       ========================================= -->
+
+  <div id="mensaje-final">
+
+    ¡Listo! Tus respuestas fueron
+    procesadas correctamente.
+
+  </div>
+
+
   <footer>
-    Desarrollado por Carlos Morales 
+
+    Desarrollado por Carlos Morales
+
   </footer>
 
-  <script>
-    window.actualizarCodigoBarras = function() {
-      const inputQ8 = document.getElementById('q8').value.trim().toUpperCase().replace(/\s+/g, '');
-      const container = document.getElementById('barcode-container');
-      
-      if (inputQ8) {
-        container.style.display = 'block';
-        JsBarcode("#barcode", inputQ8, {
-          format: "CODE128",
-          lineColor: "#000",
-          width: 2,
-          height: 60,
-          displayValue: true,
-          fontSize: 18
-        });
-      } else {
-        container.style.display = 'none';
+
+</div>
+
+
+<script>
+
+
+/* =====================================================
+   CÓDIGO DE BARRAS
+   ===================================================== */
+
+window.actualizarCodigoBarras = function () {
+
+  const inputQ8 =
+    document
+      .getElementById('q8')
+      .value
+      .trim()
+      .toUpperCase()
+      .replace(/\s+/g, '');
+
+  const container =
+    document.getElementById(
+      'barcode-container'
+    );
+
+
+  if (inputQ8) {
+
+    container.style.display =
+      'block';
+
+    container.classList.remove('barcode-visible');
+    void container.offsetWidth;
+    container.classList.add('barcode-visible');
+
+
+    JsBarcode(
+      "#barcode",
+      inputQ8,
+      {
+
+        format: "CODE128",
+
+        lineColor: "#000",
+
+        width: 2,
+
+        height: 60,
+
+        displayValue: true,
+
+        fontSize: 18
+
       }
-    };
+    );
 
-    // NUEVA FUNCIÓN: Comparte la imagen usando el menú nativo del celular
-    window.compartirImagen = async function() {
-      const img = document.getElementById('barcode');
-      
-      if (!img.src || !img.src.startsWith('data:image')) {
-        alert('Primero debes generar el código de barras.');
-        return;
-      }
+  } else {
 
-      try {
-        // Convertimos la imagen generada a un archivo compatible para compartir
-        const response = await fetch(img.src);
-        const blob = await response.blob();
-        const file = new File([blob], 'codigo_alfanumerico.png', { type: blob.type });
+    container.style.display =
+      'none';
 
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          await navigator.share({
-            title: 'Código Alfanumérico',
-            files: [file]
-          });
-        } else {
-          alert('Tu navegador no soporta esta función directa. Por favor, intenta en Google Chrome o Safari.');
-        }
-      } catch (error) {
-        console.error('Error al compartir:', error);
-      }
-    };
+  }
 
-    window.enviarAlfanumericoSolo = function() {
-      const inputQ8 = document.getElementById('q8').value.trim().toUpperCase().replace(/\s+/g, '');
-      if (inputQ8) {
-        const numeroSecundario = '525529858210';
-        const mensaje = `Código Alfanumérico: ${inputQ8}`;
-        const url = `https://wa.me/${numeroSecundario}?text=${encodeURIComponent(mensaje)}`;
-        window.open(url, '_blank');
-      } else {
-        alert('Por favor, ingresa o dicta el código alfanumérico primero.');
-      }
-    };
+};
 
-    document.getElementById('q8').addEventListener('input', window.actualizarCodigoBarras);
 
-    window.dictar = function(idCampo, btn) {
-      if (!('webkitSpeechRecognition' in window)) {
-        alert('Tu navegador no soporta reconocimiento de voz. Usa Google Chrome.');
-        return;
-      }
+/* =====================================================
+   COMPARTIR IMAGEN
+   ===================================================== */
 
-      const recognition = new webkitSpeechRecognition();
-      recognition.lang = 'es-ES';
-      recognition.interimResults = false;
-      recognition.maxAlternatives = 1;
+window.compartirImagen =
+  async function () {
 
-      const restaurarBoton = () => {
-        btn.innerText = 'Dictar';
-        btn.classList.remove('listening');
-      };
+    const img =
+      document.getElementById(
+        'barcode'
+      );
 
-      recognition.onstart = () => {
-        btn.innerText = 'Escuchando...';
-        btn.classList.add('listening');
-      };
 
-      recognition.onerror = (event) => {
-        alert('Error al reconocer la voz: ' + event.error);
-        restaurarBoton();
-      };
+    if (
+      !img.src ||
+      !img.src.startsWith(
+        'data:image'
+      )
+    ) {
 
-      recognition.onend = () => {
-        restaurarBoton();
-      };
+      alert(
+        'Primero debes generar el código de barras.'
+      );
 
-      recognition.onresult = (event) => {
-        let texto = event.results[0][0].transcript.toUpperCase();
-        if (['q1', 'q2_otro', 'q3', 'q4', 'q8'].includes(idCampo)) {
-          texto = texto.replace(/\s+/g, '');
-        }
-        document.getElementById(idCampo).value = texto;
-        
-        if (idCampo === 'q8') {
-          window.actualizarCodigoBarras();
-        }
-      };
+      return;
+    }
 
-      recognition.start();
-    };
 
-    window.mostrarOcultarOtro = function() {
-      const select = document.getElementById('q2_select');
-      const contenedorOtro = document.getElementById('q2_otro_container');
-      const inputOtro = document.getElementById('q2_otro');
+    try {
 
-      if (select.value === 'OTRO') {
-        contenedorOtro.style.display = 'block';
-        inputOtro.setAttribute('required', 'required');
-      } else {
-        contenedorOtro.style.display = 'none';
-        inputOtro.removeAttribute('required');
-        inputOtro.value = ''; 
-      }
-    };
+      const response =
+        await fetch(img.src);
 
-    const campos = document.querySelectorAll('input[type="text"], input[type="date"], select');
-    campos.forEach((campo, index) => {
-      campo.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          let siguiente = campos[index + 1];
-          if (siguiente && siguiente.id === 'q2_otro' && document.getElementById('q2_select').value !== 'OTRO') {
-              siguiente = campos[index + 2];
+      const blob =
+        await response.blob();
+
+
+      const file =
+        new File(
+          [blob],
+          'codigo_alfanumerico.png',
+          {
+            type: blob.type
           }
-          if (siguiente) siguiente.focus();
-        }
-      });
-    });
+        );
 
-    document.getElementById('quizForm').addEventListener('submit', function(e) {
+
+      if (
+        navigator.canShare &&
+        navigator.canShare({
+          files: [file]
+        })
+      ) {
+
+        await navigator.share({
+
+          title:
+            'Código Alfanumérico',
+
+          files: [file]
+
+        });
+
+      } else {
+
+        alert(
+          'Tu navegador no soporta esta función directa. ' +
+          'Por favor, intenta en Google Chrome o Safari.'
+        );
+
+      }
+
+
+    } catch (error) {
+
+      console.error(
+        'Error al compartir:',
+        error
+      );
+
+    }
+
+  };
+
+
+/* =====================================================
+   WHATSAPP ALFANUMÉRICO
+   ===================================================== */
+
+window.enviarAlfanumericoSolo =
+  function () {
+
+    const inputQ8 =
+      document
+        .getElementById('q8')
+        .value
+        .trim()
+        .toUpperCase()
+        .replace(/\s+/g, '');
+
+
+    if (inputQ8) {
+
+      const numeroSecundario =
+        '525529858210';
+
+
+      const mensaje =
+        `Código Alfanumérico: ${inputQ8}`;
+
+
+      const url =
+        `https://wa.me/${numeroSecundario}?text=${encodeURIComponent(mensaje)}`;
+
+
+      window.open(
+        url,
+        '_blank'
+      );
+
+
+    } else {
+
+      alert(
+        'Por favor, ingresa o dicta el código alfanumérico primero.'
+      );
+
+    }
+
+  };
+
+
+/* =====================================================
+   ACTUALIZAR CÓDIGO AL ESCRIBIR
+   ===================================================== */
+
+document
+  .getElementById('q8')
+  .addEventListener(
+    'input',
+    window.actualizarCodigoBarras
+  );
+
+
+/* =====================================================
+   RECONOCIMIENTO DE VOZ
+   ===================================================== */
+
+window.dictar =
+  function (idCampo, btn) {
+
+
+    if (
+      !('webkitSpeechRecognition' in window)
+    ) {
+
+      alert(
+        'Tu navegador no soporta reconocimiento de voz. ' +
+        'Usa Google Chrome.'
+      );
+
+      return;
+    }
+
+
+    const recognition =
+      new webkitSpeechRecognition();
+
+
+    recognition.lang =
+      'es-MX';
+
+
+    recognition.interimResults =
+      false;
+
+
+    recognition.maxAlternatives =
+      1;
+
+
+    const restaurarBoton =
+      () => {
+
+        btn.innerText =
+          'Dictar';
+
+        btn.classList.remove(
+          'listening'
+        );
+
+      };
+
+
+    recognition.onstart =
+      () => {
+
+        btn.innerText =
+          'Escuchando...';
+
+        btn.classList.add(
+          'listening'
+        );
+
+      };
+
+
+    recognition.onerror =
+      (event) => {
+
+        alert(
+          'Error al reconocer la voz: ' +
+          event.error
+        );
+
+        restaurarBoton();
+
+      };
+
+
+    recognition.onend =
+      () => {
+
+        restaurarBoton();
+
+      };
+
+
+    recognition.onresult =
+      (event) => {
+
+        let texto =
+          event
+            .results[0][0]
+            .transcript
+            .toUpperCase();
+
+
+        if (
+          [
+            'q1',
+            'q2_otro',
+            'q3',
+            'q4',
+            'q8'
+          ].includes(idCampo)
+        ) {
+
+          texto =
+            texto.replace(
+              /\s+/g,
+              ''
+            );
+
+        }
+
+
+        document
+          .getElementById(idCampo)
+          .value =
+          texto;
+
+
+        if (
+          idCampo === 'q8'
+        ) {
+
+          window
+            .actualizarCodigoBarras();
+
+        }
+
+
+        actualizarProgreso();
+
+      };
+
+
+    recognition.start();
+
+  };
+
+
+/* =====================================================
+   MOSTRAR / OCULTAR OTRA TAREA
+   ===================================================== */
+
+window.mostrarOcultarOtro =
+  function () {
+
+    const select =
+      document.getElementById(
+        'q2_select'
+      );
+
+
+    const contenedorOtro =
+      document.getElementById(
+        'q2_otro_container'
+      );
+
+
+    const inputOtro =
+      document.getElementById(
+        'q2_otro'
+      );
+
+
+    if (
+      select.value === 'OTRO'
+    ) {
+
+      contenedorOtro.style.display =
+        'block';
+
+      inputOtro.setAttribute(
+        'required',
+        'required'
+      );
+
+    } else {
+
+      contenedorOtro.style.display =
+        'none';
+
+      inputOtro.removeAttribute(
+        'required'
+      );
+
+      inputOtro.value =
+        '';
+
+    }
+
+
+    actualizarProgreso();
+
+  };
+
+
+/* =====================================================
+   ENTER = SIGUIENTE CAMPO
+   ===================================================== */
+
+const campos =
+  document.querySelectorAll(
+    'input[type="text"], input[type="date"], select'
+  );
+
+
+campos.forEach(
+  (campo, index) => {
+
+    campo.addEventListener(
+      'keydown',
+      function (e) {
+
+        if (
+          e.key === 'Enter'
+        ) {
+
+          e.preventDefault();
+
+
+          let siguiente =
+            campos[index + 1];
+
+
+          if (
+            siguiente &&
+            siguiente.id === 'q2_otro' &&
+            document
+              .getElementById(
+                'q2_select'
+              )
+              .value !== 'OTRO'
+          ) {
+
+            siguiente =
+              campos[index + 2];
+
+          }
+
+
+          if (siguiente) {
+
+            siguiente.focus();
+
+          }
+
+        }
+
+      }
+    );
+
+  });
+
+
+/* =====================================================
+   BARRA DE PROGRESO
+   ===================================================== */
+
+const camposProgreso = [
+
+  'q1',
+
+  'q2_select',
+
+  'q3',
+
+  'q4',
+
+  'q5',
+
+  'q6',
+
+  'q7',
+
+  'q8',
+
+  'q9',
+
+  'q10'
+
+];
+
+
+function actualizarProgreso() {
+
+  let completados = 0;
+
+
+  camposProgreso.forEach(
+    id => {
+
+      const campo =
+        document.getElementById(
+          id
+        );
+
+
+      if (
+        campo &&
+        campo.value.trim() !== ''
+      ) {
+
+        completados++;
+
+      }
+
+    }
+  );
+
+
+  const porcentaje =
+    Math.max(
+      10,
+      completados * 10
+    );
+
+
+  document
+    .getElementById(
+      'progress-fill'
+    )
+    .style.width =
+    porcentaje + '%';
+
+
+  document
+    .getElementById(
+      'progress-number'
+    )
+    .textContent =
+    completados + ' / 10';
+
+}
+
+
+/* Detectar cambios */
+
+camposProgreso.forEach(
+  id => {
+
+    const campo =
+      document.getElementById(
+        id
+      );
+
+
+    if (campo) {
+
+      campo.addEventListener(
+        'input',
+        actualizarProgreso
+      );
+
+      campo.addEventListener(
+        'change',
+        actualizarProgreso
+      );
+
+    }
+
+  }
+);
+
+
+actualizarProgreso();
+
+
+/* =====================================================
+   ENVÍO DEL FORMULARIO
+   ===================================================== */
+
+document
+  .getElementById('quizForm')
+  .addEventListener(
+    'submit',
+    function (e) {
+
       e.preventDefault();
+
+
       const answers = {};
 
-      for (let i = 1; i <= 10; i++) {
+
+      for (
+        let i = 1;
+        i <= 10;
+        i++
+      ) {
+
+
+        /* PREGUNTA 2 */
+
         if (i === 2) {
-          const selectQ2 = document.getElementById('q2_select');
-          let valorQ2 = '';
-          
-          if (selectQ2.value === 'OTRO') {
-            valorQ2 = document.getElementById('q2_otro').value.trim().toUpperCase();
+
+          const selectQ2 =
+            document.getElementById(
+              'q2_select'
+            );
+
+
+          let valorQ2 =
+            '';
+
+
+          if (
+            selectQ2.value ===
+            'OTRO'
+          ) {
+
+            valorQ2 =
+              document
+                .getElementById(
+                  'q2_otro'
+                )
+                .value
+                .trim()
+                .toUpperCase();
+
           } else {
-            valorQ2 = selectQ2.value;
+
+            valorQ2 =
+              selectQ2.value;
+
           }
-          
-          answers['pregunta2'] = valorQ2.replace(/\s+/g, '');
-          continue; 
+
+
+          answers[
+            'pregunta2'
+          ] =
+            valorQ2.replace(
+              /\s+/g,
+              ''
+            );
+
+
+          continue;
+
         }
 
-        const field = document.getElementById(`q${i}`);
-        let valor = field ? field.value.trim().toUpperCase() : '';
-        if ([1, 3, 4, 8].includes(i)) {
-          valor = valor.replace(/\s+/g, '');
+
+        /* RESTO */
+
+        const field =
+          document.getElementById(
+            `q${i}`
+          );
+
+
+        let valor =
+          field
+            ? field.value
+                .trim()
+                .toUpperCase()
+            : '';
+
+
+        if (
+          [
+            1,
+            3,
+            4,
+            8
+          ].includes(i)
+        ) {
+
+          valor =
+            valor.replace(
+              /\s+/g,
+              ''
+            );
+
         }
-        answers[`pregunta${i}`] = valor;
+
+
+        answers[
+          `pregunta${i}`
+        ] =
+          valor;
+
       }
+
+
+      /* =================================================
+         MENSAJE WHATSAPP
+         ================================================= */
 
       const mensaje = `
 *OS:* ${answers.pregunta1}
@@ -373,10 +1835,65 @@
 *TÉCNICO:* CARLOS MORALES
 *LIQUIDADO:* OK`;
 
-      const numeroTelefono = '5219981962125';
-      const url = `https://wa.me/${numeroTelefono}?text=${encodeURIComponent(mensaje)}`;
-      window.open(url, '_blank');
-    });
-  </script>
+
+      const numeroTelefono =
+        '5219981962125';
+
+
+      const url =
+        `https://wa.me/${numeroTelefono}?text=${encodeURIComponent(mensaje)}`;
+
+
+      /* Abrir WhatsApp */
+
+      window.open(
+        url,
+        '_blank'
+      );
+
+
+      /* Alert */
+
+      alert(
+        '¡Formulario terminado!\n\n' +
+        'Tus respuestas están listas para enviarse por WhatsApp.'
+      );
+
+
+      /* Mostrar mensaje */
+
+      const mensajeFinal =
+        document.getElementById(
+          'mensaje-final'
+        );
+
+
+      mensajeFinal.style.display =
+        'block';
+
+
+      mensajeFinal.innerHTML =
+        '<span class="success-icon">✓</span>' +
+        '¡Listo! Tus respuestas fueron procesadas correctamente.';
+
+      mensajeFinal.classList.remove('success-visible');
+      void mensajeFinal.offsetWidth;
+      mensajeFinal.classList.add('success-visible');
+
+
+      mensajeFinal.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+
+
+    }
+  );
+
+
+</script>
+
+
 </body>
+
 </html>
