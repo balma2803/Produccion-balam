@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 
@@ -241,6 +242,9 @@
         border-color 0.2s,
         box-shadow 0.2s,
         background 0.2s;
+
+      /* MOSTRAR TODO EN MAYÚSCULAS */
+      text-transform: uppercase;
     }
 
     input[type="text"]:focus,
@@ -257,6 +261,7 @@
 
     input::placeholder {
       color: #999db2;
+      text-transform: none;
     }
 
 
@@ -574,138 +579,170 @@
       }
     }
 
-  
-/* =========================
-   ANIMACIONES
-   ========================= */
 
-@keyframes cardEnter {
-  from {
-    opacity: 0;
-    transform: translateY(22px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+    /* =========================
+       ANIMACIONES
+       ========================= */
 
-@keyframes softPulse {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(229,57,53,0);
-  }
-  50% {
-    box-shadow: 0 0 0 8px rgba(229,57,53,0.12);
-  }
-}
+    @keyframes cardEnter {
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-@keyframes barcodeIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px) scale(.96);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
+    @keyframes softPulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(229,57,53,0);
+      }
+      50% {
+        box-shadow: 0 0 0 8px rgba(229,57,53,0.12);
+      }
+    }
 
-@keyframes successIn {
-  0% {
-    opacity: 0;
-    transform: translateY(15px) scale(.96);
-  }
-  70% {
-    transform: translateY(-3px) scale(1.01);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
+    @keyframes barcodeIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
 
-@keyframes successCheck {
-  from {
-    opacity: 0;
-    transform: scale(.5) rotate(-15deg);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) rotate(0);
-  }
-}
+    @keyframes successIn {
+      0% {
+        opacity: 0;
+        transform: translateY(15px) scale(.96);
+      }
+      70% {
+        transform: translateY(-3px) scale(1.01);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
 
-.question-container {
-  animation: cardEnter .55s ease both;
-}
+    @keyframes successCheck {
+      from {
+        opacity: 0;
+        transform: scale(.5) rotate(-15deg);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+      }
+    }
 
-.question-container:nth-of-type(1) { animation-delay: .04s; }
-.question-container:nth-of-type(2) { animation-delay: .08s; }
-.question-container:nth-of-type(3) { animation-delay: .12s; }
-.question-container:nth-of-type(4) { animation-delay: .16s; }
-.question-container:nth-of-type(5) { animation-delay: .20s; }
-.question-container:nth-of-type(6) { animation-delay: .24s; }
-.question-container:nth-of-type(7) { animation-delay: .28s; }
-.question-container:nth-of-type(8) { animation-delay: .32s; }
-.question-container:nth-of-type(9) { animation-delay: .36s; }
-.question-container:nth-of-type(10) { animation-delay: .40s; }
+    .question-container {
+      animation: cardEnter .55s ease both;
+    }
 
-.dictate-button.listening {
-  animation: softPulse 1.15s ease-in-out infinite;
-}
+    .question-container:nth-of-type(1) {
+      animation-delay: .04s;
+    }
 
-#barcode-container.barcode-visible {
-  animation: barcodeIn .4s ease both;
-}
+    .question-container:nth-of-type(2) {
+      animation-delay: .08s;
+    }
 
-#mensaje-final.success-visible {
-  animation: successIn .5s ease both;
-}
+    .question-container:nth-of-type(3) {
+      animation-delay: .12s;
+    }
 
-.success-icon {
-  display: block;
-  font-size: 38px;
-  line-height: 1;
-  margin-bottom: 9px;
-  animation: successCheck .5s .12s ease both;
-}
+    .question-container:nth-of-type(4) {
+      animation-delay: .16s;
+    }
 
-#quizForm > button[type="submit"] {
-  position: relative;
-  overflow: hidden;
-}
+    .question-container:nth-of-type(5) {
+      animation-delay: .20s;
+    }
 
-#quizForm > button[type="submit"]::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -75%;
-  width: 45%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,.22),
-    transparent
-  );
-  transform: skewX(-18deg);
-}
+    .question-container:nth-of-type(6) {
+      animation-delay: .24s;
+    }
 
-#quizForm > button[type="submit"]:hover::after {
-  animation: buttonShine .7s ease;
-}
+    .question-container:nth-of-type(7) {
+      animation-delay: .28s;
+    }
 
-@keyframes buttonShine {
-  from { left: -75%; }
-  to { left: 130%; }
-}
+    .question-container:nth-of-type(8) {
+      animation-delay: .32s;
+    }
 
-</style>
+    .question-container:nth-of-type(9) {
+      animation-delay: .36s;
+    }
+
+    .question-container:nth-of-type(10) {
+      animation-delay: .40s;
+    }
+
+    .dictate-button.listening {
+      animation: softPulse 1.15s ease-in-out infinite;
+    }
+
+    #barcode-container.barcode-visible {
+      animation: barcodeIn .4s ease both;
+    }
+
+    #mensaje-final.success-visible {
+      animation: successIn .5s ease both;
+    }
+
+    .success-icon {
+      display: block;
+      font-size: 38px;
+      line-height: 1;
+      margin-bottom: 9px;
+      animation: successCheck .5s .12s ease both;
+    }
+
+    #quizForm > button[type="submit"] {
+      position: relative;
+      overflow: hidden;
+    }
+
+    #quizForm > button[type="submit"]::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 45%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.22),
+        transparent
+      );
+      transform: skewX(-18deg);
+    }
+
+    #quizForm > button[type="submit"]:hover::after {
+      animation: buttonShine .7s ease;
+    }
+
+    @keyframes buttonShine {
+      from {
+        left: -75%;
+      }
+      to {
+        left: 130%;
+      }
+    }
+
+  </style>
 </head>
 
 
 <body>
-
 
 <div class="app">
 
@@ -717,9 +754,9 @@
   <div class="header">
 
     <img
-      src="foto.jpg"
-      class="logo"
-      alt="Balam"
+            src="foto.jpg"
+            class="logo"
+            alt="Balam"
     >
 
     <div class="header-info">
@@ -750,8 +787,8 @@
       </span>
 
       <span
-        class="progress-number"
-        id="progress-number"
+              class="progress-number"
+              id="progress-number"
       >
         0 / 10
       </span>
@@ -761,8 +798,8 @@
     <div class="progress-bar">
 
       <div
-        class="progress-fill"
-        id="progress-fill"
+              class="progress-fill"
+              id="progress-fill"
       ></div>
 
     </div>
@@ -786,15 +823,15 @@
       </label>
 
       <input
-        type="text"
-        id="q1"
-        required
+              type="text"
+              id="q1"
+              required
       >
 
       <button
-        type="button"
-        class="dictate-button"
-        onclick="dictar('q1', this)"
+              type="button"
+              class="dictate-button"
+              onclick="dictar('q1', this)"
       >
         Dictar
       </button>
@@ -811,15 +848,15 @@
       </label>
 
       <select
-        id="q2_select"
-        onchange="mostrarOcultarOtro()"
-        required
+              id="q2_select"
+              onchange="mostrarOcultarOtro()"
+              required
       >
 
         <option
-          value=""
-          disabled
-          selected
+                value=""
+                disabled
+                selected
         >
           SELECCIONA UNA OPCIÓN
         </option>
@@ -864,8 +901,8 @@
 
 
       <div
-        id="q2_otro_container"
-        class="otro-container"
+              id="q2_otro_container"
+              class="otro-container"
       >
 
         <label for="q2_otro">
@@ -873,15 +910,15 @@
         </label>
 
         <input
-          type="text"
-          id="q2_otro"
-          placeholder="Escribe o dicta la tarea..."
+                type="text"
+                id="q2_otro"
+                placeholder="Escribe o dicta la tarea..."
         >
 
         <button
-          type="button"
-          class="dictate-button"
-          onclick="dictar('q2_otro', this)"
+                type="button"
+                class="dictate-button"
+                onclick="dictar('q2_otro', this)"
         >
           Dictar
         </button>
@@ -900,15 +937,15 @@
       </label>
 
       <input
-        type="text"
-        id="q3"
-        required
+              type="text"
+              id="q3"
+              required
       >
 
       <button
-        type="button"
-        class="dictate-button"
-        onclick="dictar('q3', this)"
+              type="button"
+              class="dictate-button"
+              onclick="dictar('q3', this)"
       >
         Dictar
       </button>
@@ -925,15 +962,15 @@
       </label>
 
       <input
-        type="text"
-        id="q4"
-        required
+              type="text"
+              id="q4"
+              required
       >
 
       <button
-        type="button"
-        class="dictate-button"
-        onclick="dictar('q4', this)"
+              type="button"
+              class="dictate-button"
+              onclick="dictar('q4', this)"
       >
         Dictar
       </button>
@@ -950,15 +987,15 @@
       </label>
 
       <input
-        type="text"
-        id="q5"
-        required
+              type="text"
+              id="q5"
+              required
       >
 
       <button
-        type="button"
-        class="dictate-button"
-        onclick="dictar('q5', this)"
+              type="button"
+              class="dictate-button"
+              onclick="dictar('q5', this)"
       >
         Dictar
       </button>
@@ -975,15 +1012,15 @@
       </label>
 
       <input
-        type="text"
-        id="q6"
-        required
+              type="text"
+              id="q6"
+              required
       >
 
       <button
-        type="button"
-        class="dictate-button"
-        onclick="dictar('q6', this)"
+              type="button"
+              class="dictate-button"
+              onclick="dictar('q6', this)"
       >
         Dictar
       </button>
@@ -1000,9 +1037,9 @@
       </label>
 
       <input
-        type="text"
-        id="q7"
-        required
+              type="text"
+              id="q7"
+              required
       >
 
     </div>
@@ -1017,15 +1054,15 @@
       </label>
 
       <input
-        type="text"
-        id="q8"
-        required
+              type="text"
+              id="q8"
+              required
       >
 
       <button
-        type="button"
-        class="dictate-button"
-        onclick="dictar('q8', this)"
+              type="button"
+              class="dictate-button"
+              onclick="dictar('q8', this)"
       >
         Dictar
       </button>
@@ -1034,22 +1071,22 @@
       <div id="barcode-container">
 
         <img
-          id="barcode"
-          alt="Código de barras"
+                id="barcode"
+                alt="Código de barras"
         >
 
         <button
-          type="button"
-          class="share-img-button"
-          onclick="compartirImagen()"
+                type="button"
+                class="share-img-button"
+                onclick="compartirImagen()"
         >
           Compartir Imagen del Código
         </button>
 
         <button
-          type="button"
-          class="whatsapp-button"
-          onclick="enviarAlfanumericoSolo()"
+                type="button"
+                class="whatsapp-button"
+                onclick="enviarAlfanumericoSolo()"
         >
           Enviar Solo Texto a 5529858210
         </button>
@@ -1069,9 +1106,9 @@
       </label>
 
       <input
-        type="text"
-        id="q9"
-        required
+              type="text"
+              id="q9"
+              required
       >
 
     </div>
@@ -1086,9 +1123,9 @@
       </label>
 
       <input
-        type="date"
-        id="q10"
-        required
+              type="date"
+              id="q10"
+              required
       >
 
     </div>
@@ -1131,157 +1168,32 @@
 <script>
 
 
-/* =====================================================
-   CÓDIGO DE BARRAS
-   ===================================================== */
+  /* =====================================================
+     TODO LO QUE SE ESCRIBA EN MAYÚSCULAS
+     ===================================================== */
 
-window.actualizarCodigoBarras = function () {
+  document
+    .querySelectorAll('input[type="text"]')
+    .forEach(campo => {
 
-  const inputQ8 =
-    document
-      .getElementById('q8')
-      .value
-      .trim()
-      .toUpperCase()
-      .replace(/\s+/g, '');
+      campo.addEventListener(
+        'input',
+        function () {
 
-  const container =
-    document.getElementById(
-      'barcode-container'
-    );
+          this.value =
+            this.value.toUpperCase();
 
-
-  if (inputQ8) {
-
-    container.style.display =
-      'block';
-
-    container.classList.remove('barcode-visible');
-    void container.offsetWidth;
-    container.classList.add('barcode-visible');
-
-
-    JsBarcode(
-      "#barcode",
-      inputQ8,
-      {
-
-        format: "CODE128",
-
-        lineColor: "#000",
-
-        width: 2,
-
-        height: 60,
-
-        displayValue: true,
-
-        fontSize: 18
-
-      }
-    );
-
-  } else {
-
-    container.style.display =
-      'none';
-
-  }
-
-};
-
-
-/* =====================================================
-   COMPARTIR IMAGEN
-   ===================================================== */
-
-window.compartirImagen =
-  async function () {
-
-    const img =
-      document.getElementById(
-        'barcode'
+        }
       );
 
-
-    if (
-      !img.src ||
-      !img.src.startsWith(
-        'data:image'
-      )
-    ) {
-
-      alert(
-        'Primero debes generar el código de barras.'
-      );
-
-      return;
-    }
+    });
 
 
-    try {
+  /* =====================================================
+     CÓDIGO DE BARRAS
+     ===================================================== */
 
-      const response =
-        await fetch(img.src);
-
-      const blob =
-        await response.blob();
-
-
-      const file =
-        new File(
-          [blob],
-          'codigo_alfanumerico.png',
-          {
-            type: blob.type
-          }
-        );
-
-
-      if (
-        navigator.canShare &&
-        navigator.canShare({
-          files: [file]
-        })
-      ) {
-
-        await navigator.share({
-
-          title:
-            'Código Alfanumérico',
-
-          files: [file]
-
-        });
-
-      } else {
-
-        alert(
-          'Tu navegador no soporta esta función directa. ' +
-          'Por favor, intenta en Google Chrome o Safari.'
-        );
-
-      }
-
-
-    } catch (error) {
-
-      console.error(
-        'Error al compartir:',
-        error
-      );
-
-    }
-
-  };
-
-
-/* =====================================================
-   WHATSAPP ALFANUMÉRICO
-   ===================================================== */
-
-window.enviarAlfanumericoSolo =
-  function () {
+  window.actualizarCodigoBarras = function () {
 
     const inputQ8 =
       document
@@ -1291,337 +1203,538 @@ window.enviarAlfanumericoSolo =
         .toUpperCase()
         .replace(/\s+/g, '');
 
+    const container =
+      document.getElementById(
+        'barcode-container'
+      );
+
 
     if (inputQ8) {
 
-      const numeroSecundario =
-        '525529858210';
-
-
-      const mensaje =
-        `Código Alfanumérico: ${inputQ8}`;
-
-
-      const url =
-        `https://wa.me/${numeroSecundario}?text=${encodeURIComponent(mensaje)}`;
-
-
-      window.open(
-        url,
-        '_blank'
-      );
-
-
-    } else {
-
-      alert(
-        'Por favor, ingresa o dicta el código alfanumérico primero.'
-      );
-
-    }
-
-  };
-
-
-/* =====================================================
-   ACTUALIZAR CÓDIGO AL ESCRIBIR
-   ===================================================== */
-
-document
-  .getElementById('q8')
-  .addEventListener(
-    'input',
-    window.actualizarCodigoBarras
-  );
-
-
-/* =====================================================
-   RECONOCIMIENTO DE VOZ
-   ===================================================== */
-
-window.dictar =
-  function (idCampo, btn) {
-
-
-    if (
-      !('webkitSpeechRecognition' in window)
-    ) {
-
-      alert(
-        'Tu navegador no soporta reconocimiento de voz. ' +
-        'Usa Google Chrome.'
-      );
-
-      return;
-    }
-
-
-    const recognition =
-      new webkitSpeechRecognition();
-
-
-    recognition.lang =
-      'es-MX';
-
-
-    recognition.interimResults =
-      false;
-
-
-    recognition.maxAlternatives =
-      1;
-
-
-    const restaurarBoton =
-      () => {
-
-        btn.innerText =
-          'Dictar';
-
-        btn.classList.remove(
-          'listening'
-        );
-
-      };
-
-
-    recognition.onstart =
-      () => {
-
-        btn.innerText =
-          'Escuchando...';
-
-        btn.classList.add(
-          'listening'
-        );
-
-      };
-
-
-    recognition.onerror =
-      (event) => {
-
-        alert(
-          'Error al reconocer la voz: ' +
-          event.error
-        );
-
-        restaurarBoton();
-
-      };
-
-
-    recognition.onend =
-      () => {
-
-        restaurarBoton();
-
-      };
-
-
-    recognition.onresult =
-      (event) => {
-
-        let texto =
-          event
-            .results[0][0]
-            .transcript
-            .toUpperCase();
-
-
-        if (
-          [
-            'q1',
-            'q2_otro',
-            'q3',
-            'q4',
-            'q8'
-          ].includes(idCampo)
-        ) {
-
-          texto =
-            texto.replace(
-              /\s+/g,
-              ''
-            );
-
-        }
-
-
-        document
-          .getElementById(idCampo)
-          .value =
-          texto;
-
-
-        if (
-          idCampo === 'q8'
-        ) {
-
-          window
-            .actualizarCodigoBarras();
-
-        }
-
-
-        actualizarProgreso();
-
-      };
-
-
-    recognition.start();
-
-  };
-
-
-/* =====================================================
-   MOSTRAR / OCULTAR OTRA TAREA
-   ===================================================== */
-
-window.mostrarOcultarOtro =
-  function () {
-
-    const select =
-      document.getElementById(
-        'q2_select'
-      );
-
-
-    const contenedorOtro =
-      document.getElementById(
-        'q2_otro_container'
-      );
-
-
-    const inputOtro =
-      document.getElementById(
-        'q2_otro'
-      );
-
-
-    if (
-      select.value === 'OTRO'
-    ) {
-
-      contenedorOtro.style.display =
+      container.style.display =
         'block';
 
-      inputOtro.setAttribute(
-        'required',
-        'required'
+      container.classList.remove(
+        'barcode-visible'
+      );
+
+      void container.offsetWidth;
+
+      container.classList.add(
+        'barcode-visible'
+      );
+
+
+      JsBarcode(
+        "#barcode",
+        inputQ8,
+        {
+
+          format: "CODE128",
+
+          lineColor: "#000",
+
+          width: 2,
+
+          height: 60,
+
+          displayValue: true,
+
+          fontSize: 18
+
+        }
       );
 
     } else {
 
-      contenedorOtro.style.display =
+      container.style.display =
         'none';
 
-      inputOtro.removeAttribute(
-        'required'
-      );
-
-      inputOtro.value =
-        '';
-
     }
-
-
-    actualizarProgreso();
 
   };
 
 
-/* =====================================================
-   ENTER = SIGUIENTE CAMPO
-   ===================================================== */
+  /* =====================================================
+     COMPARTIR IMAGEN
+     ===================================================== */
 
-const campos =
-  document.querySelectorAll(
-    'input[type="text"], input[type="date"], select'
-  );
+  window.compartirImagen =
+    async function () {
+
+      const img =
+        document.getElementById(
+          'barcode'
+        );
 
 
-campos.forEach(
-  (campo, index) => {
+      if (
+        !img.src ||
+        !img.src.startsWith(
+          'data:image'
+        )
+      ) {
 
-    campo.addEventListener(
-      'keydown',
-      function (e) {
+        alert(
+          'Primero debes generar el código de barras.'
+        );
+
+        return;
+      }
+
+
+      try {
+
+        const response =
+          await fetch(img.src);
+
+        const blob =
+          await response.blob();
+
+
+        const file =
+          new File(
+            [blob],
+            'codigo_alfanumerico.png',
+            {
+              type: blob.type
+            }
+          );
+
 
         if (
-          e.key === 'Enter'
+          navigator.canShare &&
+          navigator.canShare({
+            files: [file]
+          })
         ) {
 
-          e.preventDefault();
+          await navigator.share({
+
+            title:
+              'Código Alfanumérico',
+
+            files: [file]
+
+          });
+
+        } else {
+
+          alert(
+            'Tu navegador no soporta esta función directa. ' +
+            'Por favor, intenta en Google Chrome o Safari.'
+          );
+
+        }
 
 
-          let siguiente =
-            campos[index + 1];
+      } catch (error) {
+
+        console.error(
+          'Error al compartir:',
+          error
+        );
+
+      }
+
+    };
+
+
+  /* =====================================================
+     WHATSAPP ALFANUMÉRICO
+     ===================================================== */
+
+  window.enviarAlfanumericoSolo =
+    function () {
+
+      const inputQ8 =
+        document
+          .getElementById('q8')
+          .value
+          .trim()
+          .toUpperCase()
+          .replace(/\s+/g, '');
+
+
+      if (inputQ8) {
+
+        const numeroSecundario =
+          '525529858210';
+
+
+        const mensaje =
+          `Código Alfanumérico: ${inputQ8}`;
+
+
+        const url =
+          `https://wa.me/${numeroSecundario}?text=${encodeURIComponent(mensaje)}`;
+
+
+        window.open(
+          url,
+          '_blank'
+        );
+
+
+      } else {
+
+        alert(
+          'Por favor, ingresa o dicta el código alfanumérico primero.'
+        );
+
+      }
+
+    };
+
+
+  /* =====================================================
+     ACTUALIZAR CÓDIGO AL ESCRIBIR
+     ===================================================== */
+
+  document
+    .getElementById('q8')
+    .addEventListener(
+      'input',
+      window.actualizarCodigoBarras
+    );
+
+
+  /* =====================================================
+     RECONOCIMIENTO DE VOZ
+     ===================================================== */
+
+  window.dictar =
+    function (idCampo, btn) {
+
+
+      if (
+        !('webkitSpeechRecognition' in window)
+      ) {
+
+        alert(
+          'Tu navegador no soporta reconocimiento de voz. ' +
+          'Usa Google Chrome.'
+        );
+
+        return;
+      }
+
+
+      const recognition =
+        new webkitSpeechRecognition();
+
+
+      recognition.lang =
+        'es-MX';
+
+
+      recognition.interimResults =
+        false;
+
+
+      recognition.maxAlternatives =
+        1;
+
+
+      const restaurarBoton =
+        () => {
+
+          btn.innerText =
+            'Dictar';
+
+          btn.classList.remove(
+            'listening'
+          );
+
+        };
+
+
+      recognition.onstart =
+        () => {
+
+          btn.innerText =
+            'Escuchando...';
+
+          btn.classList.add(
+            'listening'
+          );
+
+        };
+
+
+      recognition.onerror =
+        (event) => {
+
+          alert(
+            'Error al reconocer la voz: ' +
+            event.error
+          );
+
+          restaurarBoton();
+
+        };
+
+
+      recognition.onend =
+        () => {
+
+          restaurarBoton();
+
+        };
+
+
+      recognition.onresult =
+        (event) => {
+
+          let texto =
+            event
+              .results[0][0]
+              .transcript
+              .toUpperCase();
 
 
           if (
-            siguiente &&
-            siguiente.id === 'q2_otro' &&
-            document
-              .getElementById(
-                'q2_select'
-              )
-              .value !== 'OTRO'
+            [
+              'q1',
+              'q2_otro',
+              'q3',
+              'q4',
+              'q8'
+            ].includes(idCampo)
           ) {
 
-            siguiente =
-              campos[index + 2];
+            texto =
+              texto.replace(
+                /\s+/g,
+                ''
+              );
 
           }
 
 
-          if (siguiente) {
+          document
+            .getElementById(idCampo)
+            .value =
+            texto;
 
-            siguiente.focus();
+
+          if (
+            idCampo === 'q8'
+          ) {
+
+            window
+              .actualizarCodigoBarras();
 
           }
+
+
+          actualizarProgreso();
+
+        };
+
+
+      recognition.start();
+
+    };
+
+
+  /* =====================================================
+     MOSTRAR / OCULTAR OTRA TAREA
+     ===================================================== */
+
+  window.mostrarOcultarOtro =
+    function () {
+
+      const select =
+        document.getElementById(
+          'q2_select'
+        );
+
+
+      const contenedorOtro =
+        document.getElementById(
+          'q2_otro_container'
+        );
+
+
+      const inputOtro =
+        document.getElementById(
+          'q2_otro'
+        );
+
+
+      if (
+        select.value === 'OTRO'
+      ) {
+
+        contenedorOtro.style.display =
+          'block';
+
+        inputOtro.setAttribute(
+          'required',
+          'required'
+        );
+
+      } else {
+
+        contenedorOtro.style.display =
+          'none';
+
+        inputOtro.removeAttribute(
+          'required'
+        );
+
+        inputOtro.value =
+          '';
+
+      }
+
+
+      actualizarProgreso();
+
+    };
+
+
+  /* =====================================================
+     ENTER = SIGUIENTE CAMPO
+     ===================================================== */
+
+  const campos =
+    document.querySelectorAll(
+      'input[type="text"], input[type="date"], select'
+    );
+
+
+  campos.forEach(
+    (campo, index) => {
+
+      campo.addEventListener(
+        'keydown',
+        function (e) {
+
+          if (
+            e.key === 'Enter'
+          ) {
+
+            e.preventDefault();
+
+
+            let siguiente =
+              campos[index + 1];
+
+
+            if (
+              siguiente &&
+              siguiente.id === 'q2_otro' &&
+              document
+                .getElementById(
+                  'q2_select'
+                )
+                .value !== 'OTRO'
+            ) {
+
+              siguiente =
+                campos[index + 2];
+
+            }
+
+
+            if (siguiente) {
+
+              siguiente.focus();
+
+            }
+
+          }
+
+        }
+      );
+
+    });
+
+
+  /* =====================================================
+     BARRA DE PROGRESO
+     ===================================================== */
+
+  const camposProgreso = [
+
+    'q1',
+
+    'q2_select',
+
+    'q3',
+
+    'q4',
+
+    'q5',
+
+    'q6',
+
+    'q7',
+
+    'q8',
+
+    'q9',
+
+    'q10'
+
+  ];
+
+
+  function actualizarProgreso() {
+
+    let completados = 0;
+
+
+    camposProgreso.forEach(
+      id => {
+
+        const campo =
+          document.getElementById(
+            id
+          );
+
+
+        if (
+          campo &&
+          campo.value.trim() !== ''
+        ) {
+
+          completados++;
 
         }
 
       }
     );
 
-  });
+
+    const porcentaje =
+      Math.max(
+        10,
+        completados * 10
+      );
 
 
-/* =====================================================
-   BARRA DE PROGRESO
-   ===================================================== */
-
-const camposProgreso = [
-
-  'q1',
-
-  'q2_select',
-
-  'q3',
-
-  'q4',
-
-  'q5',
-
-  'q6',
-
-  'q7',
-
-  'q8',
-
-  'q9',
-
-  'q10'
-
-];
+    document
+      .getElementById(
+        'progress-fill'
+      )
+      .style.width =
+      porcentaje + '%';
 
 
-function actualizarProgreso() {
+    document
+      .getElementById(
+        'progress-number'
+      )
+      .textContent =
+      completados + ' / 10';
 
-  let completados = 0;
+  }
 
+
+  /* Detectar cambios */
 
   camposProgreso.forEach(
     id => {
@@ -1632,12 +1745,17 @@ function actualizarProgreso() {
         );
 
 
-      if (
-        campo &&
-        campo.value.trim() !== ''
-      ) {
+      if (campo) {
 
-        completados++;
+        campo.addEventListener(
+          'input',
+          actualizarProgreso
+        );
+
+        campo.addEventListener(
+          'change',
+          actualizarProgreso
+        );
 
       }
 
@@ -1645,250 +1763,202 @@ function actualizarProgreso() {
   );
 
 
-  const porcentaje =
-    Math.max(
-      10,
-      completados * 10
-    );
+  actualizarProgreso();
 
 
-  document
-    .getElementById(
-      'progress-fill'
-    )
-    .style.width =
-    porcentaje + '%';
-
+  /* =====================================================
+     ENVÍO DEL FORMULARIO
+     ===================================================== */
 
   document
-    .getElementById(
-      'progress-number'
-    )
-    .textContent =
-    completados + ' / 10';
+    .getElementById('quizForm')
+    .addEventListener(
+      'submit',
+      function (e) {
 
-}
-
-
-/* Detectar cambios */
-
-camposProgreso.forEach(
-  id => {
-
-    const campo =
-      document.getElementById(
-        id
-      );
+        e.preventDefault();
 
 
-    if (campo) {
-
-      campo.addEventListener(
-        'input',
-        actualizarProgreso
-      );
-
-      campo.addEventListener(
-        'change',
-        actualizarProgreso
-      );
-
-    }
-
-  }
-);
+        const answers = {};
 
 
-actualizarProgreso();
+        for (
+          let i = 1;
+          i <= 10;
+          i++
+        ) {
 
 
-/* =====================================================
-   ENVÍO DEL FORMULARIO
-   ===================================================== */
+          /* PREGUNTA 2 */
 
-document
-  .getElementById('quizForm')
-  .addEventListener(
-    'submit',
-    function (e) {
+          if (i === 2) {
 
-      e.preventDefault();
+            const selectQ2 =
+              document.getElementById(
+                'q2_select'
+              );
 
 
-      const answers = {};
+            let valorQ2 =
+              '';
 
 
-      for (
-        let i = 1;
-        i <= 10;
-        i++
-      ) {
+            if (
+              selectQ2.value ===
+              'OTRO'
+            ) {
+
+              valorQ2 =
+                document
+                  .getElementById(
+                    'q2_otro'
+                  )
+                  .value
+                  .trim()
+                  .toUpperCase();
+
+            } else {
+
+              valorQ2 =
+                selectQ2.value;
+
+            }
 
 
-        /* PREGUNTA 2 */
+            answers[
+              'pregunta2'
+            ] =
+              valorQ2.replace(
+                /\s+/g,
+                ''
+              );
 
-        if (i === 2) {
 
-          const selectQ2 =
+            continue;
+
+          }
+
+
+          /* RESTO */
+
+          const field =
             document.getElementById(
-              'q2_select'
+              `q${i}`
             );
 
 
-          let valorQ2 =
-            '';
+          let valor =
+            field
+              ? field.value
+                  .trim()
+                  .toUpperCase()
+              : '';
 
 
           if (
-            selectQ2.value ===
-            'OTRO'
+            [
+              1,
+              3,
+              4,
+              8
+            ].includes(i)
           ) {
 
-            valorQ2 =
-              document
-                .getElementById(
-                  'q2_otro'
-                )
-                .value
-                .trim()
-                .toUpperCase();
-
-          } else {
-
-            valorQ2 =
-              selectQ2.value;
+            valor =
+              valor.replace(
+                /\s+/g,
+                ''
+              );
 
           }
 
 
           answers[
-            'pregunta2'
+            `pregunta${i}`
           ] =
-            valorQ2.replace(
-              /\s+/g,
-              ''
-            );
-
-
-          continue;
+            valor;
 
         }
 
 
-        /* RESTO */
+        /* =================================================
+           MENSAJE WHATSAPP
+           ================================================= */
 
-        const field =
-          document.getElementById(
-            `q${i}`
-          );
-
-
-        let valor =
-          field
-            ? field.value
-                .trim()
-                .toUpperCase()
-            : '';
-
-
-        if (
-          [
-            1,
-            3,
-            4,
-            8
-          ].includes(i)
-        ) {
-
-          valor =
-            valor.replace(
-              /\s+/g,
-              ''
-            );
-
-        }
+        const mensaje = `
+  *OS:* ${answers.pregunta1}
+  *TIPO DE ORDEN:* ${answers.pregunta2}
+  *FOLIO PISAPLEX:* ${answers.pregunta3}
+  *TEL:* ${answers.pregunta4}
+  *CLIENTE:* ${answers.pregunta5}
+  *DIRECCIÓN:* ${answers.pregunta6}
+  *DISTRITO:* ${answers.pregunta7}
+  *ALFANUMÉRICO:* ${answers.pregunta8}
+  *FIBRA:* ${answers.pregunta9}
+  *FECHA:* ${answers.pregunta10}
+  *TÉCNICO:* CARLOS MORALES
+  *LIQUIDADO:* OK`;
 
 
-        answers[
-          `pregunta${i}`
-        ] =
-          valor;
-
-      }
+        const numeroTelefono =
+          '5219981962125';
 
 
-      /* =================================================
-         MENSAJE WHATSAPP
-         ================================================= */
-
-      const mensaje = `
-*OS:* ${answers.pregunta1}
-*TIPO DE ORDEN:* ${answers.pregunta2}
-*FOLIO PISAPLEX:* ${answers.pregunta3}
-*TEL:* ${answers.pregunta4}
-*CLIENTE:* ${answers.pregunta5}
-*DIRECCIÓN:* ${answers.pregunta6}
-*DISTRITO:* ${answers.pregunta7}
-*ALFANUMÉRICO:* ${answers.pregunta8}
-*FIBRA:* ${answers.pregunta9}
-*FECHA:* ${answers.pregunta10}
-*TÉCNICO:* CARLOS MORALES
-*LIQUIDADO:* OK`;
+        const url =
+          `https://wa.me/${numeroTelefono}?text=${encodeURIComponent(mensaje)}`;
 
 
-      const numeroTelefono =
-        '5219981962125';
+        /* Abrir WhatsApp */
 
-
-      const url =
-        `https://wa.me/${numeroTelefono}?text=${encodeURIComponent(mensaje)}`;
-
-
-      /* Abrir WhatsApp */
-
-      window.open(
-        url,
-        '_blank'
-      );
-
-
-      /* Alert */
-
-      alert(
-        '¡Formulario terminado!\n\n' +
-        'Tus respuestas están listas para enviarse por WhatsApp.'
-      );
-
-
-      /* Mostrar mensaje */
-
-      const mensajeFinal =
-        document.getElementById(
-          'mensaje-final'
+        window.open(
+          url,
+          '_blank'
         );
 
 
-      mensajeFinal.style.display =
-        'block';
+        /* Alert */
+
+        alert(
+          '¡Formulario terminado!\n\n' +
+          'Tus respuestas están listas para enviarse por WhatsApp.'
+        );
 
 
-      mensajeFinal.innerHTML =
-        '<span class="success-icon">✓</span>' +
-        '¡Listo! Tus respuestas fueron procesadas correctamente.';
+        /* Mostrar mensaje */
 
-      mensajeFinal.classList.remove('success-visible');
-      void mensajeFinal.offsetWidth;
-      mensajeFinal.classList.add('success-visible');
-
-
-      mensajeFinal.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-      });
+        const mensajeFinal =
+          document.getElementById(
+            'mensaje-final'
+          );
 
 
-    }
-  );
+        mensajeFinal.style.display =
+          'block';
+
+
+        mensajeFinal.innerHTML =
+          '<span class="success-icon">✓</span>' +
+          '¡Listo! Tus respuestas fueron procesadas correctamente.';
+
+        mensajeFinal.classList.remove(
+          'success-visible'
+        );
+
+        void mensajeFinal.offsetWidth;
+
+        mensajeFinal.classList.add(
+          'success-visible'
+        );
+
+
+        mensajeFinal.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+
+
+      }
+    );
 
 
 </script>
@@ -1897,3 +1967,4 @@ document
 </body>
 
 </html>
+```
